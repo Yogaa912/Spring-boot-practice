@@ -1,0 +1,11 @@
+1743178942747	Move 'WEB-INF' to 'WebContent'
+1743179362456	Rename resource 'login.jsp'
+1743179989562	Move 'success.jsp' to 'webapp'
+1743179992261	Move 'hello.jsp' to 'webapp'
+1743180001647	Move 'web.xml' to 'META-INF'
+1743180009542	Delete element
+1743180365687	Delete element
+1743180859405	Move 'dao' to 'java'
+1743180860950	Move 'controller' to 'java'
+1743180868685	Move 'model' to 'java'
+1743181438595	Move 'web.xml' to 'WEB-INF'

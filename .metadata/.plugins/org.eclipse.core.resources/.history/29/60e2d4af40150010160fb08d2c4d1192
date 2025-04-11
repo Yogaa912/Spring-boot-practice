@@ -1,0 +1,28 @@
+package com.example;
+
+import java.net.URL;
+import java.util.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringMiniIocApplication {
+	private Map<Class<?>, Object> beanMap = new HashMap<>();
+	public SpringMiniIocApplication(String basePackage) {
+		// 构造器
+		// 1. 扫描包路径下所有的类
+		List<Class<?>> classList = scanPackage(basePackage);
+	}
+	public static void main(String[] args) {
+		SpringApplication.run(SpringMiniIocApplication.class, args);
+	}
+	
+	private List<Class<?>> scanPackage(String basePackage) {
+		List<Class<?>> classes = new ArrayList<>();
+		String path = basePackage.replace('.','/');
+		URL url = Thread.currentThread().getContextClassLoader().getResource(path);
+		
+		return null;
+	}
+
+}

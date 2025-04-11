@@ -1,0 +1,25 @@
+package com.example;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication // 让 Spring 扫描并注册所有 Bean
+public class SpringBeanDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBeanDemoApplication.class, args);
+		
+		// 启动 Spring Boot 应用
+        ApplicationContext context = SpringApplication.run(SpringBeanDemoApplication.class, args);
+
+        // 获取 UserController Bean
+        UserController userController = context.getBean(UserController.class);
+        userController.printUserName();
+	}
+
+}
+/**
+ * 创建 Spring Boot 启动类
+ * 
+ */

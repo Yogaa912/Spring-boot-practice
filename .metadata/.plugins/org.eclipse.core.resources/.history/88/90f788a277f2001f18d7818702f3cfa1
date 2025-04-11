@@ -1,0 +1,23 @@
+package com.example;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import org.springframework.stereotype.Component;
+
+@Component // 让 Spring 自动管理这个 Bean
+public class UserService {
+	
+	// @Component 让 Spring 自动将 UserService 作为 Bean 进行管理。
+	public String getUserName() {
+        return "Hello, User!";
+    }
+	
+    @PostConstruct  // 初始化时执行
+    public void init() {
+        System.out.println("UserService 被初始化");
+    }
+
+    @PreDestroy  // Bean 销毁前执行
+    public void destroy() {
+        System.out.println("UserService 被销毁");
+    }
+}

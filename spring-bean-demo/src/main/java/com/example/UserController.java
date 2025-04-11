@@ -1,0 +1,19 @@
+package com.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserController {
+
+    @Autowired  // 依赖注入
+    private UserService userService;
+
+    public void printUserName() {
+        System.out.println(userService.getUserName());
+    }
+}
+/**
+ * 依赖注入
+ * 创建 UserController，让 UserService 作为 Bean 自动注入
+ */

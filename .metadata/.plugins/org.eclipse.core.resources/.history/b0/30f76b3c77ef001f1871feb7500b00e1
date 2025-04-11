@@ -1,0 +1,18 @@
+package com.example;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserService {
+
+    @PostConstruct  // 初始化时执行
+    public void init() {
+        System.out.println("UserService 被初始化");
+    }
+
+    @PreDestroy  // Bean 销毁前执行
+    public void destroy() {
+        System.out.println("UserService 被销毁");
+    }
+}
