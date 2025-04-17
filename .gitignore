@@ -7,3 +7,4 @@ LeetCode/
 *.log
 
 # 排除某个子目录下的特定文件
+/.metadata/
