@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>City List</title></head>
+<body>
+<h1>City List</h1>
+<ul>
+  <li th:each="city : ${cities}" th:text="${city.name}">City</li>
+</ul>
+<p th:if="${#lists.isEmpty(cities)}">暂无城市数据</p>
+</body>
+</html>

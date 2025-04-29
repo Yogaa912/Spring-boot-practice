@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>提交成功</title>
+</head>
+<body>
+<h2>提交成功！</h2>
+<p>Name: <span th:text="${submittedFruit.name}"></span></p>
+<p>日期: <span th:text="${#temporals.format(submittedFruit.arrivedDate, 'yyyy年MM月dd日')}"></span></p>
+
+<a th:href="@{/fruits/list}"> 返回列表 </a>
+</body>
+</html>

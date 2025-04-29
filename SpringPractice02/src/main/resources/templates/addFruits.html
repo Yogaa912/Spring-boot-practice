@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title> Add User</title>
+</head>
+<body>
+
+<h1>Add User</h1>
+<!-- 提交表单 -->
+<h1 th:text="新增水果"></h1>
+<form th:action="@{/fruits/add}" th:object="${fruits}" method="post">
+	<input type="hidden" th:field="*{id}" />
+	<label> 名字 </label>
+	<input type="text" th:field="*{name}"/>
+	
+	<label> 到达时间 </label>
+	<input type="date" th:field="*{arrivedDate}"/>
+	<br/><br/>
+	
+    <button type="submit">Save</button>
+</form>
+<a th:href="@{/fruits/list}"> 返回列表 </a>
+</body>
+</html>

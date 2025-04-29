@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Fruit List</title></head>
+<body>
+<h1>Fruit List</h1>
+<a th:href="@{/fruits/add}"> 新增水果 </a>
+<table border="1">
+	<tr>
+		<th>ID</th> <th> 名称 </th> <th> 到货日期 </th> <th> 操作 </th>
+	</tr>
+  	<tr th:each="Fruit : ${fruits}">
+  		<td th:text="${Fruit.id}"></td>
+  		<td th:text="${Fruit.name}"></td>
+  		<td th:text="${Fruit.arrivedDate}"></td>
+  		<td>
+  			<a th:href="@{/fruits/edit/{id}(id=${Fruit.id})}"> 编辑 </a>
+  			<a th:href="@{/fruits/delete/{id}(id=${Fruit.id})}">删除 </a>
+		</td>
+	</tr>
+</table>
+<p th:if="${#lists.isEmpty(fruits)}">暂无数据</p>
+
+</body>
+</html>
