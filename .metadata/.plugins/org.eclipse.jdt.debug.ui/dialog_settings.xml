@@ -12,12 +12,12 @@
 	</section>
 	<section name="org.eclipse.jdt.debug.ui.MAIN_METHOD_SELECTION_DIALOG">
 		<item key="ShowStatusLine" value="true"/>
-		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History&gt;&#x0A;&lt;historyRootNode&gt;&#x0A;&lt;infoNode&gt;=mockito-demo/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&amp;lt;com.example{App.java[App&lt;/infoNode&gt;&#x0A;&lt;/historyRootNode&gt;&#x0A;&lt;/History&gt;"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History&gt;&#x0A;&lt;historyRootNode&gt;&#x0A;&lt;infoNode&gt;=mockito-demo/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&amp;lt;com.example{App.java[App&lt;/infoNode&gt;&#x0A;&lt;infoNode&gt;=mybatis-generator-gui-master/src\/main\/java&amp;lt;com.zzg.mybatis.generator{MainUI.java[MainUI&lt;/infoNode&gt;&#x0A;&lt;infoNode&gt;=SpringMybatis2/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&amp;lt;com.springPractice{SpringMybatis02Application.java[SpringMybatis02Application&lt;/infoNode&gt;&#x0A;&lt;/historyRootNode&gt;&#x0A;&lt;/History&gt;"/>
 		<section name="DialogBoundsSettings">
 			<item key="DIALOG_HEIGHT" value="500"/>
 			<item key="DIALOG_WIDTH" value="600"/>
-			<item key="DIALOG_X_ORIGIN" value="422"/>
-			<item key="DIALOG_Y_ORIGIN" value="139"/>
+			<item key="DIALOG_X_ORIGIN" value="152"/>
+			<item key="DIALOG_Y_ORIGIN" value="203"/>
 			<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
 		</section>
 	</section>

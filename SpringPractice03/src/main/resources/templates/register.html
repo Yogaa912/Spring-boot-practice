@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<meta charset="UTF-8">
+<title> 用户注册 </title>
+
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+</script>
+</head>
+<body>
+
+
+
+<p th:text="${state == null ? '':stat.msg}" class="bg-danger">...</p>
+<p>
+
+
+</p>
+<hr>
+
+
+<a th:href="@{/list}">用户列表</a>
+<a th:href="@{/register}">用户注册</a>
+
+<form action="register" method="post">
+  <div class="form-group">
+  <!-- 这里的for = 下面一行的id, 那后面的name是干嘛用的, 跟后端连接的吗-->
+    <label for="loginName">loginName</label>
+    <input type="text" name="loginName" class="form-control" id="loginName" placeholder="请输入登录名">
+  </div>
+  
+  
+  <div class="form-group">
+    <label for="Password">Password</label>
+    <input type="password" name="password" class="form-control" id="Password" placeholder="请输入密码">
+  </div>
+
+  <div class="form-group">
+    <label for="nickName">昵称</label>
+    <input type="text" name="nickName" class="form-control" id="nickName" placeholder="你的昵称是？">
+  </div>
+  <div class="form-group">
+    <label for="age">年龄</label>
+    <input type="text" name="age" class="form-control" id="age" placeholder="你的昵称是？">
+  </div>
+
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- namespace 对应到接口上就不需要实例化了 -->
+<mapper namespace="com.springPractice.mapper.AccountMapper">
+	
+	<!-- sql 语句返回的结果集需要给他映射回来 -->
+	<!-- pojo 对象和表之间 字段和属性的映射关系 -->
+	<resultMap type="com.springPractice.Entity.Account" id="BaseResultMap">
+		
+		<!-- 要定义每一行的信息和实体类的对应关系 -->
+		<!-- column 是表里的字段, property 是实体对象里面的属性 -->
+		<result column="login_name" property="loginName"/>
+		<result column="password" property="password"/>
+		<result column="nick_name" property="nickName"/>
+		<result column="age" property="age"/>
+	</resultMap>
+
+	<!-- select 的实现 -->
+	<select id="findAll" resultMap="BaseResultMap">
+		select * from account
+	</select>
+		
+	<!-- 增加一个方法, 这里的#{}里面的元素, 是直接从 Account 里面 get 方法获取到的 -->
+	<insert id="add" parameterType="com.springPractice.Entity.Account">
+		insert into account(login_name, password)
+		values
+		(
+			#{loginName}, #{password}
+		)
+	</insert> 
+
+</mapper>

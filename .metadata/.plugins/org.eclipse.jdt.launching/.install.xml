@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dirs>
     <entry loc="/Library/Java/JavaVirtualMachines/jdk-23.jdk/Contents/Home" stamp="1731487138681"/>
+    <entry loc="/Users/yujiazhang/.sdkman/candidates/java/11.0.26-tem" stamp="1737486236000"/>
     <entry loc="/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.aarch64_21.0.4.v20240802-1551" stamp="1725521002000"/>
     <entry loc="/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.aarch64_21.0.4.v20240802-1551/jre" stamp="1725521002000"/>
+    <entry loc="/Users/yujiazhang/.sdkman/candidates/java/8.0.442-zulu" stamp="1736260619000"/>
 </dirs>

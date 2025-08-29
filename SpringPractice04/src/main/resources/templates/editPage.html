@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title> Add City </title>
+</head>
+<body>
+
+<h1>Add City</h1>
+<!-- 提交表单 -->
+<h1 th:text="编辑城市"></h1>
+<form th:action="@{/city/edit}" th:object="${city}" method="post">
+	<input type="hidden" th:field="*{id}" />
+	<label> 名字 </label>
+	<input type="text" th:field="*{name}"/>
+	
+	<br/><br/>
+	
+    <button type="submit">Save</button>
+</form>
+<a th:href="@{/city/list}"> 返回列表 </a>
+</body>
+</html>

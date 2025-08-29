@@ -6,6 +6,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/Users/yujiazhang/Desktop/temp/03 OA账户权限管理/13 开发-RBAC、表设计、YAML、项目配置"/>
 			<item value="/Users/yujiazhang/eclipse-workspace/mockito-demo"/>
 		</list>
 		<list key="projectNameTemplate">

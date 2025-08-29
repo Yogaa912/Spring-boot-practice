@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
-	<item key="replaceBarOpen" value="true"/>
+	<item key="replaceBarOpen" value="false"/>
 	<list key="replacehistory">
 		<item value="},{"/>
 		<item value="}"/>
@@ -13,16 +13,20 @@
 		<item value="wordSet"/>
 	</list>
 	<list key="searchhistory">
-		<item value="leaf"/>
-		<item value="security"/>
-		<item value="],["/>
-		<item value="]"/>
-		<item value="git"/>
-		<item value="ransomNode"/>
-		<item value="ransom"/>
-		<item value="ransomNote"/>
-		<item value="magazine"/>
-		<item value="Solution"/>
-		<item value="dic"/>
+		<item value="devtools"/>
+		<item value="passwordChangeModal"/>
+		<item value="addEvent"/>
+		<item value="login_btn"/>
+		<item value="href"/>
+		<item value="herf"/>
+		<item value="qxsq"/>
+		<item value="sprycheckbox1"/>
+		<item value="list"/>
+		<item value="\mapperAccountExample"/>
+		<item value="Entity.AccountExample"/>
+		<item value="loginName"/>
+		<item value="Entity.Menu"/>
+		<item value="generated"/>
+		<item value="mybatis"/>
 	</list>
 </section>

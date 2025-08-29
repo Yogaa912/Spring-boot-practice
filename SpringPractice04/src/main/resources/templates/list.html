@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>City List</title></head>
+<body>
+<h1>City List</h1>
+<a th:href="@{/city/add}"> 新增城市 </a>
+
+<table border="1">
+	<tr>
+		<th>ID</th> <th> 名称 </th> <th> 操作 </th>
+	</tr>
+  	<tr th:each="city : ${cities}">
+  		<td th:text="${city.id}"></td>
+  		<td th:text="${city.name}"></td>
+		<td>
+  			<a th:href="@{/city/edit/{id}(id=${city.id})}"> 编辑 </a>
+  			<a th:href="@{/city/delete/{id}(id=${city.id})}">删除 </a>
+		</td>
+	</tr>
+</table>
+<p th:if="${#lists.isEmpty(cities)}">暂无数据</p>
+
+</body>
+</html>
