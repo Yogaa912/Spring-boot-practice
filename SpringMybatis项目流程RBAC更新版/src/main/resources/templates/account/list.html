@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>自动化系统</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.css">
+
+</head>
+<body>
+<table id="accountTable"></table> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.js"></script>
+<script src="/js/common/account-management.js"></script>
+
+<!-- 页头 导航栏 ↓ -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/index">首页</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">公文流转 <span class="sr-only">公文流转</span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">人员管理 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/account/list">用户列表</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="请输入员工姓名">
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+      </form>
+      
+      <!-- 对于未登录用户 -->
+      <ul th:if="${session.account}==null" class="nav navbar-nav navbar-right">
+        <li><a href="/account/register">注册</a></li>
+        <li><a href="/account/login">登陆</a></li>
+      </ul>
+      <!-- 已登录用户 直接显示信息 -->
+      <ul th:if="${session.account}!=null"class="nav navbar-nav navbar-right">
+        <li class="dropdown active">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欢迎: [[${session.account.loginName}]] <span class="caret"><span class="badge">42</span></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/account/profile">个人信息</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/logOut">退出登录</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- 已登录用户 直接显示信息 ↑ -->
+        
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- 页头 导航栏 ↑ -->
+
+<!-- Table ↓ -->
+<body th:data-current-user-role="${session.account.role}">
+<table
+  id="accountTable"
+  data-toggle="table"
+  data-url="/api/account/listAccounts"  
+  data-pagination="true"
+  data-page-size="5"
+  data-search="true"
+  data-response-handler="responseHandler">
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="loginName">登录名</th>
+      <th data-field="nickName">昵称</th>
+      <th data-field="age">年龄</th>
+      <th data-field="location">地址</th>
+      <th data-field="role">角色</th>
+      <th data-formatter="operateFormatter" data-events="operateEvents">操作</th>
+    </tr>
+  </thead>
+</table>
+<!-- Table ↑ -->
+
+
+<!-- 模态框的 HTML 结构 -->
+<div class="modal fade" id="passwordChangeModal" tabindex="-1" aria-labelledby="passwordChangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passwordChangeModalLabel">修改密码</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="password-error-alert" class="alert alert-danger" style="display: none;" role="alert"></div>
+
+                <form id="passwordChangeForm">
+                    <input type="hidden" id="accountId" name="accountId" value="">
+
+                    <div class="mb-3">
+                        <label for="oldPassword" class="form-label">旧密码</label>
+                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">新密码</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">确认新密码</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" form="passwordChangeForm">确认修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框的 end -->
+
+<!-- script -->
+<script type="text/javascript">
+
+/* 弹窗的 js */
+$(document).ready(function() {
+	var passwordChangeModal = document.getElementById('passwordChangeModal');
+	// 监听 Modal 的打开事件
+	passwordChangeModal.addEventListener('show.bs.modal', function (event){	// 自动生成 event 对象 
+		// 这里的 event.relatedTarget 就是上面那个 <a> 标签！
+		// 获取触发模态框的按钮
+		console.log("Modal is opening");
+		var button = event.relatedTarget; // 所以这里是点击修改的那个按钮
+		console.log("The button that opened the modal is:", button);
+		// 从按钮的 data-account-id 属性中提取账户 ID
+		var accountId = button.getAttribute('data-account-id');
+		console.log("The extracted accountId value is:", accountId);
+		// 将ID设置到表单的隐藏字段中 为什么需要这一步呢
+		/*
+		因为你的模态框（Modal）是“公用”的，而你要修改密码的用户是“特定”的。
+		这个操作就是为了告诉公用的表单，它这次到底为哪个特定的用户服务
+		*/
+		var modalFormAccountId = passwordChangeModal.querySelector('#accountId');
+		modalFormAccountId.value = accountId;
+	});
+	
+	// 2. 监听表单的提交事件
+	$('#passwordChangeForm').on('submit', function(event){
+		// 阻止表单的默认同步提交行为
+		event.preventDefault();
+		
+		// 简单的前端校验 那为什么放在这里而不是直接放在html的部分呢
+		var newPassword = $('#newPassword').val();
+		var confirmPassword = $('#confirmPassword').val();
+		if(newPassword != confirmPassword){
+			$('#password-error-alert').text('两次输入的密码不一致!').show();
+			return;
+		}
+		// 序列化表单
+		var formData = $(this).serialize();
+		
+		// 3. 发送 AJAX 请求到后端, 第一次使用这个$.ajax(), 对比之前的登陆注册
+		$.ajax({
+			type: 'POST',
+			url: /*[[@{/api/account/updatePassword}]]*/ '/api/account/updatePassword', // Thymeleaf动态生成URL
+			data: formData,
+			success: function(response) {
+				// 请求成功
+				alert(response.message);
+				$('#passwordChangeModal').modal('hide'); // 关闭模态框
+			},
+			error: function(xhr) {
+				// 请求失败
+				var errorMsg = xhr.responseJSON ? xhr.responseJSON.error : '发生未知错误';
+                $('#password-error-alert').text(errorMsg).show(); // 在模态框内显示错误信息
+			}
+		});
+	});
+	// 4. 清理模态框状态
+    passwordChangeModal.addEventListener('hidden.bs.modal', function (event) {
+        // 关闭模态框时，清空表单内容和错误提示
+        $('#passwordChangeForm')[0].reset();
+        $('#password-error-alert').hide().text('');
+    });
+});
+
+<!-- deleteById -->
+function deleteById(id){
+	console.log("id:" + id)
+	// 更合理的方式是异步请求 ajax 去访问带有 json 访问结果的 controller
+	// 删除的方法: 直接连接的方法访问controller里面的删除方法 -> 会页面跳转, 点击之后跳转到新的url
+	// 最终返回一个 ResStat 类型的结果, 此处是使用 Map 实现
+	if(confirm('您确定要删除 工号 为' + id + '的账户吗？')) {
+		// 用户点击了确定
+		// 使用 Fetch API 发送异步请求
+		fetch('/account/delete/' + id, {method:'POST'})
+		.then(response => response.json())
+		.then(data => {if(data.success) {alert("删除成功");
+				// 从页面上移除对应的行
+				const row = document.getElementById('account-row-' + id);
+				if(row) {row.remove();
+				}
+			} else {alert("删除失败:" + data.message);
+			}
+		})
+		.catch(error => {console.error('删除时发生错误', error);
+			alert("删除失败, 请查看控制台日志.");
+		});
+	}
+}
+</script>
+</body>
+</html>
