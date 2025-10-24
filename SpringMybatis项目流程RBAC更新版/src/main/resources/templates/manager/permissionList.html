@@ -9,83 +9,83 @@
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.css">
 
 </head>
-<body>
+<body th:data-current-user-role="${session.account.role}">
 <table id="accountTable"></table> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.js"></script>
-<script src="/js/common/account-management.js"></script>
+<script src="/js/common/permission-management.js"></script>
 
 <!-- 页头 导航栏 ↓ -->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/index">首页</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">公文流转 <span class="sr-only">公文流转</span></a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">人员管理 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/account/list">用户列表</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+    <a class="nav-item" th:href="@{/index}">首页</a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">公文流转</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            人员管理
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" th:href="@{/account/list}">用户列表</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="请输入员工姓名">
-        </div>
-        <button type="submit" class="btn btn-default">搜索</button>
+      
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="请输入员工姓名" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">搜索</button>
       </form>
       
-      <!-- 对于未登录用户 -->
-      <ul th:if="${session.account}==null" class="nav navbar-nav navbar-right">
-        <li><a href="/account/register">注册</a></li>
-        <li><a href="/account/login">登陆</a></li>
+      <ul th:if="${session.account}==null" class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/account/register}">注册</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/account/login}">登陆</a>
+        </li>
       </ul>
-      <!-- 已登录用户 直接显示信息 -->
-      <ul th:if="${session.account}!=null"class="nav navbar-nav navbar-right">
-        <li class="dropdown active">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欢迎: [[${session.account.loginName}]] <span class="caret"><span class="badge">42</span></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/account/profile">个人信息</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="/account/logOut">退出登录</a></li>
+      
+      <ul th:if="${session.account}!=null" class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            欢迎: [[${session.account.loginName}]]
+            <span class="badge bg-danger">42</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
+            <li><a class="dropdown-item" th:href="@{/account/profile}">个人信息</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" th:href="@{/account/logOut}">退出登录</a></li>
           </ul>
         </li>
       </ul>
-      <!-- 已登录用户 直接显示信息 ↑ -->
-        
-      
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
 <!-- 页头 导航栏 ↑ -->
 <h1> 权限管理 </h1>
-
+<a href="#" class="btn btn-warning btn-sm edit-btn" 
+	data-bs-toggle="modal"
+	data-bs-target="#permissionCreateModal">
+	创建新的权限
+</a>
 <!-- Table ↓ -->
-<body th:data-current-user-role="${session.account.role}">
 <table
-  id="accountTable"
+  id="permissionTable"
   data-toggle="table"
-  data-url="/api/account/listAccounts"  
+  data-url="/api/permission/list"  
   data-pagination="true"
   data-page-size="5"
   data-search="true"
@@ -93,12 +93,13 @@
   <thead>
     <tr>
       <th data-field="id">ID</th>
-      <th data-field="loginName">登录名</th>
-      <th data-field="nickName">昵称</th>
-      <th data-field="age">年龄</th>
-      <th data-field="location">地址</th>
-      <th data-field="role">角色</th>
-      <th data-formatter="operateFormatter" data-events="operateEvents">操作</th>
+      <th data-field="uni">uri</th>
+      <th data-field="name">权限名称</th>
+      <th data-field="c">增加</th>
+      <th data-field="r">查询</th>
+      <th data-field="u">修改</th>
+      <th data-field="d">删除</th>
+      <th data-formatter="permissionOperateFormatter" data-events="operateEvents">操作</th>
     </tr>
   </thead>
 </table>
@@ -106,36 +107,112 @@
 
 
 <!-- 模态框的 HTML 结构 -->
-<div class="modal fade" id="passwordChangeModal" tabindex="-1" aria-labelledby="passwordChangeModalLabel" aria-hidden="true">
+<div class="modal fade" id="permissionChangeModal" tabindex="-1" aria-labelledby="permissionChangeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="passwordChangeModalLabel">修改密码</h5>
+                <h5 class="modal-title" id="permissionChangeModalLabel">修改权限</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div id="password-error-alert" class="alert alert-danger" style="display: none;" role="alert"></div>
 
-                <form id="passwordChangeForm">
-                    <input type="hidden" id="accountId" name="accountId" value="">
+                <form id="permissionChangeForm">
+                    <input type="hidden" id="permissionId" name="id" value="">
 
                     <div class="mb-3">
-                        <label for="oldPassword" class="form-label">旧密码</label>
-                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
+                        <label for="permissionName" class="form-label">权限名称</label>
+                        <input type="text" class="form-control" id="permissionName" name="name">
                     </div>
                     <div class="mb-3">
-                        <label for="newPassword" class="form-label">新密码</label>
-                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                        <label for="permissionUri" class="form-label">URI</label>
+                        <input type="text" class="form-control" id="permissionUri" name="uni">
                     </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">确认新密码</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                    </div>
+                    
+                    <fieldset class="mb-3">
+					    <legend class="form-label fs-6">分配权限</legend>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="c" name="c" value="true">
+					        <label class="form-check-label" for="c">创建 (Create)</label>
+					    </div>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="r" name="r" value="true">
+					        <label class="form-check-label" for="r">读取 (Read)</label>
+					    </div>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="u" name="u" value="true">
+					        <label class="form-check-label" for="u">更新 (Update)</label>
+					    </div>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="d" name="d" value="true">
+					        <label class="form-check-label" for="d">删除 (Delete)</label>
+					    </div>
+					</fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" form="passwordChangeForm">确认修改</button>
+                <button type="submit" class="btn btn-primary" form="permissionChangeForm">确认修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框的 end -->
+<!-- 创建的模态框 -->
+<div class="modal fade" id="permissionCreateModal" tabindex="-1" aria-labelledby="permissionCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="permissionCreateModalLabel">创建权限</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="password-error-alert" class="alert alert-danger" style="display: none;" role="alert"></div>
+
+                <form id="permissionCreateForm">
+                    <input type="hidden" id="permissionId" name="id" value="">
+
+                    <div class="mb-3">
+                        <label for="permissionName" class="form-label">权限名称</label>
+                        <input type="text" class="form-control" id="permissionName" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="permissionUri" class="form-label">URI</label>
+                        <input type="text" class="form-control" id="permissionUri" name="uni">
+                    </div>
+                    
+                    <fieldset class="mb-3">
+					    <legend class="form-label fs-6">分配权限</legend>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="c" name="c" value="true">
+					        <label class="form-check-label" for="c">创建 (Create)</label>
+					    </div>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="r" name="r" value="true">
+					        <label class="form-check-label" for="r">读取 (Read)</label>
+					    </div>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="u" name="u" value="true">
+					        <label class="form-check-label" for="u">更新 (Update)</label>
+					    </div>
+					
+					    <div class="form-check form-check-inline">
+					        <input class="form-check-input" type="checkbox" id="d" name="d" value="true">
+					        <label class="form-check-label" for="d">删除 (Delete)</label>
+					    </div>
+					</fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" form="permissionCreateForm">确认创建</button>
             </div>
         </div>
     </div>
@@ -147,50 +224,71 @@
 
 /* 弹窗的 js */
 $(document).ready(function() {
-	var passwordChangeModal = document.getElementById('passwordChangeModal');
-	// 监听 Modal 的打开事件
-	passwordChangeModal.addEventListener('show.bs.modal', function (event){	// 自动生成 event 对象 
+	var permissionChangeModal = document.getElementById('permissionChangeModal');
+	// 1. 监听 Modal 的打开事件
+	permissionChangeModal.addEventListener('show.bs.modal', function (event){	// 自动生成 event 对象 
 		// 这里的 event.relatedTarget 就是上面那个 <a> 标签！
 		// 获取触发模态框的按钮
 		console.log("Modal is opening");
 		var button = event.relatedTarget; // 所以这里是点击修改的那个按钮
 		console.log("The button that opened the modal is:", button);
-		// 从按钮的 data-account-id 属性中提取账户 ID
-		var accountId = button.getAttribute('data-account-id');
-		console.log("The extracted accountId value is:", accountId);
-		// 将ID设置到表单的隐藏字段中 为什么需要这一步呢
-		/*
+		// 从按钮的 data-permission-id 属性中提取账户 ID
+		
+		// 1.2. 从按钮上读取所有 data-* 属性的值
+	    var permissionId = button.getAttribute('data-permission-id');
+	    var permissionName = button.getAttribute('data-permission-name');
+	    var permissionUri = button.getAttribute('data-permission-uri');
+	    var permissionC = button.getAttribute('data-permission-c') === 'true'; // 将字符串转回布尔值
+	    var permissionR = button.getAttribute('data-permission-r') === 'true';
+	    var permissionU = button.getAttribute('data-permission-u') === 'true';
+	    var permissionD = button.getAttribute('data-permission-d') === 'true';
+		
+		console.log("The extracted permissionId value is:", permissionId);
+		
+		// 1.3. 找到模态框内部对应的表单元素 (使用 jQuery 会更方便)
+	    var modalForm = $(permissionChangeModal); // 将原生 DOM 转为 jQuery 对象
+
+	    // 1.4. 将读取到的值，设置到对应的表单字段中
+	    modalForm.find('#permissionId').val(permissionId);
+	    modalForm.find('#permissionName').val(permissionName); 
+	    modalForm.find('#permissionUri').val(permissionUri);     
+	    
+	    // 对于 Checkbox，需要设置其 checked 属性
+	    modalForm.find('#c').prop('checked', permissionC); 
+	    modalForm.find('#r').prop('checked', permissionR);
+	    modalForm.find('#u').prop('checked', permissionU);
+	    modalForm.find('#d').prop('checked', permissionD);
+		
+		/* 将ID设置到表单的隐藏字段中 为什么需要这一步呢
 		因为你的模态框（Modal）是“公用”的，而你要修改密码的用户是“特定”的。
 		这个操作就是为了告诉公用的表单，它这次到底为哪个特定的用户服务
 		*/
-		var modalFormAccountId = passwordChangeModal.querySelector('#accountId');
-		modalFormAccountId.value = accountId;
+		var modalFormPermissionId = permissionChangeModal.querySelector('#permissionId');
+		modalFormPermissionId.value = permissionId;
 	});
 	
 	// 2. 监听表单的提交事件
-	$('#passwordChangeForm').on('submit', function(event){
+	$('#permissionChangeForm').on('submit', function(event){
 		// 阻止表单的默认同步提交行为
 		event.preventDefault();
 		
-		// 简单的前端校验 那为什么放在这里而不是直接放在html的部分呢
-		var newPassword = $('#newPassword').val();
-		var confirmPassword = $('#confirmPassword').val();
-		if(newPassword != confirmPassword){
-			$('#password-error-alert').text('两次输入的密码不一致!').show();
-			return;
-		}
 		// 序列化表单
 		var formData = $(this).serialize();
+		console.log("formData:" + formData);
 		
 		// 3. 发送 AJAX 请求到后端, 第一次使用这个$.ajax(), 对比之前的登陆注册
 		$.ajax({
 			type: 'POST',
-			url: /*[[@{/api/account/updatePassword}]]*/ '/api/account/updatePassword', // Thymeleaf动态生成URL
+			url: '/api/permission/permissionModify', // Thymeleaf动态生成URL
 			data: formData,
 			success: function(response) {
 				// 请求成功
 				alert(response.message);
-				$('#passwordChangeModal').modal('hide'); // 关闭模态框
+				$('#permissionChangeModal').modal('hide'); // 关闭模态框
+				$('#permissionTable').bootstrapTable('refresh');	// 刷新表格！
+				$('.modal-backdrop').remove(); 
+		        // 同时确保 body 上的 modal-open 类被移除 (Bootstrap 应该会自动做，但可以加一道保险)
+		        $('body').removeClass('modal-open');
 			},
 			error: function(xhr) {
 				// 请求失败
@@ -200,34 +298,97 @@ $(document).ready(function() {
 		});
 	});
 	// 4. 清理模态框状态
-    passwordChangeModal.addEventListener('hidden.bs.modal', function (event) {
+    permissionChangeModal.addEventListener('hidden.bs.modal', function (event) {
         // 关闭模态框时，清空表单内容和错误提示
-        $('#passwordChangeForm')[0].reset();
+        $('#permissionChangeForm')[0].reset();
+        $('#password-error-alert').hide().text('');
+    });
+});
+
+/* 创建操作 js */
+$(document).ready(function() {
+	var permissionCreateModal = document.getElementById('permissionCreateModal');
+	// 1. 监听 Modal 的打开事件
+	permissionCreateModal.addEventListener('show.bs.modal', function (event){	// 自动生成 event 对象 
+		console.log("Modal for creating is opening");
+		var button = event.relatedTarget; 
+		console.log("The button that opened the modal is:", button);
+	});
+	
+	// 2. 监听表单的提交事件
+	$('#permissionCreateForm').on('submit', function(event){
+		// 阻止表单的默认同步提交行为
+		event.preventDefault();
+		
+		// 序列化表单
+		var formData = $(this).serialize();
+		console.log("formData:" + formData);
+		
+		// 3. 发送 AJAX 请求到后端, 第一次使用这个$.ajax(), 对比之前的登陆注册
+		$.ajax({
+			type: 'POST',
+			url: '/api/permission/permissionCreate', // Thymeleaf动态生成URL
+			data: formData,
+			success: function(response) {
+				// 请求成功
+				alert(response.message);
+				$('#permissionCreateModal').modal('hide'); // 关闭模态框
+				$('#permissionTable').bootstrapTable('refresh');	// 刷新表格！
+				$('.modal-backdrop').remove(); 
+		        // 同时确保 body 上的 modal-open 类被移除 (Bootstrap 应该会自动做，但可以加一道保险)
+		        $('body').removeClass('modal-open');
+			},
+			error: function(xhr) {
+				// 请求失败
+				var errorMsg = xhr.responseJSON ? xhr.responseJSON.error : '发生未知错误';
+                $('#password-error-alert').text(errorMsg).show(); // 在模态框内显示错误信息
+			}
+		});
+	});
+	// 4. 清理模态框状态
+    permissionCreateModal.addEventListener('hidden.bs.modal', function (event) {
+        // 关闭模态框时，清空表单内容和错误提示
+        $('#permissionCreateForm')[0].reset();
         $('#password-error-alert').hide().text('');
     });
 });
 
 <!-- deleteById -->
 function deleteById(id){
-	console.log("id:" + id)
-	// 更合理的方式是异步请求 ajax 去访问带有 json 访问结果的 controller
+	console.log("即将删除的权限 ID:" + id)
+	// 还可以是异步请求 ajax 去访问带有 json 访问结果的 controller
 	// 删除的方法: 直接连接的方法访问controller里面的删除方法 -> 会页面跳转, 点击之后跳转到新的url
 	// 最终返回一个 ResStat 类型的结果, 此处是使用 Map 实现
-	if(confirm('您确定要删除 工号 为' + id + '的账户吗？')) {
+	if(confirm('您确定要删除 id 为' + id + '的权限吗？')) {
 		// 用户点击了确定
 		// 使用 Fetch API 发送异步请求
-		fetch('/account/delete/' + id, {method:'POST'})
-		.then(response => response.json())
-		.then(data => {if(data.success) {alert("删除成功");
-				// 从页面上移除对应的行
-				const row = document.getElementById('account-row-' + id);
-				if(row) {row.remove();
-				}
-			} else {alert("删除失败:" + data.message);
+		fetch('/api/permission/delete/' + id, {method:'POST'})
+		.then(response => {	// .then(response => response.json())
+			if(!response.ok) {
+				// 如果状态码不是 2xx，则抛出错误，进入 .catch()
+                // 尝试解析错误信息，如果后端返回了 JSON 的话
+                return response.json().then(errData => {
+                	throw new Error(errData.message || `HTTP error! status: ${response.status}`);
+                }).catch(() => {
+                	// 如果解析 JSON 失败，则抛出通用错误
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                });
+			}
+			// 如果状态码是 2xx，则解析 JSON
+            return response.json(); 
+		})
+		.then(data => {
+			// 走到这里，说明 response.ok 是 true 并且 JSON 解析成功
+			if(data.success) {
+				alert("删除成功");
+				$('#permissionTable').bootstrapTable('refresh');
+			} else {
+				alert("删除失败:" + data.message);
 			}
 		})
-		.catch(error => {console.error('删除时发生错误', error);
-			alert("删除失败, 请查看控制台日志.");
+		.catch(error => {
+			console.error('删除时发生错误', error);
+			alert("删除失败, 请查看控制台日志." + error.message);
 		});
 	}
 }

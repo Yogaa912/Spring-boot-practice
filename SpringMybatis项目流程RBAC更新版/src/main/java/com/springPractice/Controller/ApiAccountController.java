@@ -35,6 +35,7 @@ public class ApiAccountController {
 	    // 最好一次性返回所有的数据
 		PageInfo<Account> pageInfo = accountSrv.findByPage(pageNum, 100);
 		// ↑ 把后面传过来的list展示在前端
+		// 把三个页面需要的 apiController 分开
 		return pageInfo;
 	}
 	
@@ -65,7 +66,7 @@ public class ApiAccountController {
 			// 调用 service
 			boolean success = accountSrv.changePassword(passwordChangeDto.getAccountId(), passwordChangeDto.getOldPassword(), newPassword);
 			if(success) {
-				return ResponseEntity.ok(Map.of("message", "密码修改成功"));
+				return ResponseEntity.ok(Map.of("success", true, "message", "密码修改成功"));
 			} else {
 				return ResponseEntity.badRequest().body(Map.of("error", "旧密码不正确"));
 			}

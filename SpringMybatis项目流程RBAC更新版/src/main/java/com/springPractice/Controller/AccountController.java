@@ -143,7 +143,7 @@ public class AccountController implements ServletContextAware{
 		
 		// 1. 从 session 中获取当前操作者的信息
 		Account operator = (Account)session.getAttribute("account");
-		if(operator.getRole() != "admin") {
+		if (!"admin".equals(operator.getRole())) {
 			response.put("success", false);
 			response.put("message", "用户没有权限");
 			return response;

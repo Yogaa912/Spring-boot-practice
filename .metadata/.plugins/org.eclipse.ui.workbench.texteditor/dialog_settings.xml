@@ -3,6 +3,7 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="true"/>
 	<list key="replacehistory">
+		<item value="permissionSrv"/>
 		<item value="  "/>
 		<item value=" "/>
 		<item value="Isdeleted"/>
@@ -18,20 +19,20 @@
 		<item value="wordSet"/>
 	</list>
 	<list key="searchhistory">
-		<item value="\s*public\s+\w+\s+get\w+\s*\([^)]*\)\s*\{[^}]*\}\s*|\s*public\s+void\s+set\w+\s*\([^)]*\)\s*\{[^}]*\}\s*"/>
-		<item value="/\*[\s\S]*?\*/"/>
-		<item value="Isdelated"/>
-		<item value="isdelated"/>
-		<item value="isDelated"/>
-		<item value="common"/>
-		<item value="commmon"/>
-		<item value="select"/>
-		<item value="Entity.AccountExample"/>
-		<item value="\Entity.AccountExample"/>
-		<item value="AccountExample"/>
-		<item value="entity.RoleExample"/>
-		<item value="entity.Role"/>
-		<item value="ty.PermissionExample"/>
-		<item value="PermissionExample"/>
+		<item value="passwordChangeModalLabel"/>
+		<item value="body"/>
+		<item value="permissionChangeForm"/>
+		<item value="permissionOperateFormatter"/>
+		<item value="submit"/>
+		<item value="password-error-alert"/>
+		<item value="不能为空"/>
+		<item value="permissionChangeModal"/>
+		<item value="passwordChangeForm"/>
+		<item value="passwordChangeModal"/>
+		<item value="data-permission-id"/>
+		<item value="accountId"/>
+		<item value="data-account-id"/>
+		<item value="findBy"/>
+		<item value="accountSrv"/>
 	</list>
 </section>

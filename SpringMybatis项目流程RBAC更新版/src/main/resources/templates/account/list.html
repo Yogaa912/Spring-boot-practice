@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.css">
 
 </head>
-<body>
+<body th:data-current-user-role="${session.account.role}">
 <table id="accountTable"></table> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.js"></script>
@@ -80,7 +80,6 @@
 <!-- 页头 导航栏 ↑ -->
 
 <!-- Table ↓ -->
-<body th:data-current-user-role="${session.account.role}">
 <table
   id="accountTable"
   data-toggle="table"
@@ -190,6 +189,10 @@ $(document).ready(function() {
 				// 请求成功
 				alert(response.message);
 				$('#passwordChangeModal').modal('hide'); // 关闭模态框
+				$('#accountTable').bootstrapTable('refresh');	// 刷新表格！
+				$('.modal-backdrop').remove(); 
+		        // 同时确保 body 上的 modal-open 类被移除 (Bootstrap 应该会自动做，但可以加一道保险)
+		        $('body').removeClass('modal-open');
 			},
 			error: function(xhr) {
 				// 请求失败

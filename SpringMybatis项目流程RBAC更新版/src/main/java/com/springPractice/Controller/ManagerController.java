@@ -42,7 +42,7 @@ public class ManagerController {
     
     @GetMapping("permissionList")
 	public String permissionList() {
-		System.out.println();
+		System.out.println("permissionController");
 		return "/manager/permissionList";
 	}
 }
